@@ -1,4 +1,6 @@
 import React from 'react';
+import './form.css';
+import PropTypes from 'prop-types';
 
 class Card extends React.Component {
   render() {
@@ -44,9 +46,9 @@ class Card extends React.Component {
           { cardRare }
         </p>
 
-        <p data-testid="trunfo-card">
-          Super Trunfo
-        </p>
+        {
+          cardTrunfo ? <p data-testid="trunfo-card">Super Trunfo</p> : null
+        }
       </>
     );
   }
