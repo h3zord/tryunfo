@@ -8,13 +8,14 @@ class App extends React.Component {
     this.state = {
       cardName: '',
       cardDescription: '',
-      cardAttr1: '0',
-      cardAttr2: '0',
-      cardAttr3: '0',
+      cardAttr1: '',
+      cardAttr2: '',
+      cardAttr3: '',
       cardImage: '',
       cardRare: '',
       cardTrunfo: false,
       hasTrunfo: false,
+      dataCard: [],
     };
   }
 
@@ -39,8 +40,33 @@ class App extends React.Component {
     const bool1 = objectArr1.some((el1) => el1 === '');
     const bool2 = objectArr2.some((el2) => Number(el2) > maxValue || Number(el2) < 0);
     if (sumValues > maxSumValue) bool3 = true;
-    console.log(bool1, bool2, bool3);
     return bool1 || bool2 || bool3;
+  }
+
+  saveButtonClick = () => {
+    const { cardName, cardDescription, cardAttr1, cardAttr2,
+      cardAttr3, cardImage, cardRare, cardTrunfo } = this.state;
+    const obj = {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    };
+    this.setState((prevState) => ({
+      dataCard: [...prevState.dataCard, obj],
+      cardName: '',
+      cardDescription: '',
+      cardImage: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardRare: '',
+      cardTrunfo: false,
+    }));
   }
 
   render() {
@@ -71,7 +97,7 @@ class App extends React.Component {
           hasTrunfo={ hasTrunfo }
           isSaveButtonDisabled={ this.buttonDisabled() }
           onInputChange={ saveStateInput }
-          onSaveButtonClick={ () => {} }
+          onSaveButtonClick={ this.saveButtonClick }
         />
         <Card
           cardName={ cardName }
