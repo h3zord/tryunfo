@@ -22,7 +22,6 @@ class App extends React.Component {
   saveStateInput = ({ target }) => {
     const { name } = target;
     const value = (target.type === 'checkbox') ? target.checked : target.value;
-
     this.setState(() => ({
       [name]: value,
     }));
@@ -65,13 +64,22 @@ class App extends React.Component {
       cardAttr2: '0',
       cardAttr3: '0',
       cardRare: '',
-      cardTrunfo: false,
     }));
+    this.searchHasTrunfo();
+  }
+
+  searchHasTrunfo = () => {
+    const { cardTrunfo } = this.state;
+    if (cardTrunfo) {
+      this.setState({
+        hasTrunfo: true,
+        cardTrunfo: false,
+      });
+    }
   }
 
   render() {
     const {
-
       cardName,
       cardDescription,
       cardAttr1,
