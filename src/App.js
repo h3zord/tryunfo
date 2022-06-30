@@ -22,6 +22,10 @@ class App extends React.Component {
       dataFilterRare: {
         dataRare: '',
       },
+      dataFilterTrunfo: {
+        dataTrunfo: false,
+      },
+      boolValue: false,
     };
   }
 
@@ -121,23 +125,34 @@ class App extends React.Component {
     }
   }
 
+  filterTrunfoCard = ({ target }) => {
+    const { checked } = target;
+    if (checked) {
+      this.setState({
+        dataFilterTrunfo: {
+          dataTrunfo: true,
+        },
+        boolValue: true,
+      });
+    } else {
+      this.setState({
+        dataFilterTrunfo: {
+          dataTrunfo: false,
+
+        },
+        boolValue: false,
+      });
+    }
+  }
+
   render() {
     const {
-      cardName,
-      cardDescription,
-      cardAttr1,
-      cardAttr2,
-      cardAttr3,
-      cardImage,
-      cardRare,
-      cardTrunfo,
-      hasTrunfo,
-      dataCard,
-      dataFilterName,
-      dataFilterRare,
-    } = this.state;
+      cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage,
+      cardRare, cardTrunfo, hasTrunfo, dataCard, dataFilterName, dataFilterRare,
+      dataFilterTrunfo, boolValue } = this.state;
     const { dataName } = dataFilterName;
     const { dataRare } = dataFilterRare;
+    const { dataTrunfo } = dataFilterTrunfo;
     const { saveStateInput } = this;
     return (
       <>
@@ -166,14 +181,13 @@ class App extends React.Component {
           cardTrunfo={ cardTrunfo }
         />
         <p>Coleção de Cartas</p>
-
         <input
           type="text"
           data-testid="name-filter"
           placeholder="Nome da Carta"
           onChange={ this.filterNameCard }
+          disabled={ boolValue }
         />
-
         <label htmlFor="rare">
           Raridade
           <select
@@ -181,6 +195,7 @@ class App extends React.Component {
             name="rare"
             id="rare"
             onChange={ this.filterRareCard }
+            disabled={ boolValue }
           >
             <option>todas</option>
             <option>normal</option>
@@ -188,11 +203,21 @@ class App extends React.Component {
             <option>muito raro</option>
           </select>
         </label>
-
+        <label htmlFor="trunfo">
+          Super Trunfo
+          <input
+            type="checkbox"
+            data-testid="trunfo-filter"
+            name="trunfo"
+            id="trunfo"
+            onChange={ this.filterTrunfoCard }
+          />
+        </label>
         {
           dataCard
             .filter((name) => name.cardName.toLowerCase().includes(dataName))
             .filter((rare) => rare.cardRare.startsWith(dataRare))
+            .filter((trunfo) => trunfo.cardTrunfo === dataTrunfo)
             .map((element) => (
               <div key={ element.cardName }>
                 <Card
@@ -217,7 +242,6 @@ class App extends React.Component {
             ))
         }
       </>
-
     );
   }
 }
