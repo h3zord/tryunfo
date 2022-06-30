@@ -217,7 +217,7 @@ class App extends React.Component {
           dataCard
             .filter((name) => name.cardName.toLowerCase().includes(dataName))
             .filter((rare) => rare.cardRare.startsWith(dataRare))
-            .filter((trunfo) => trunfo.cardTrunfo === dataTrunfo)
+            // .filter((trunfo) => trunfo.cardTrunfo === dataTrunfo)
             .map((element) => (
               <div key={ element.cardName }>
                 <Card
