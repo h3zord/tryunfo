@@ -95,7 +95,7 @@ class Form extends React.Component {
         </label>
 
         <label htmlFor="imgURL">
-          nsira a URL da imagem:
+          insira a URL da imagem:
           <input
             type="text"
             data-testid="image-input"

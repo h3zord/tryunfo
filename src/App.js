@@ -16,6 +16,9 @@ class App extends React.Component {
       cardTrunfo: false,
       hasTrunfo: false,
       dataCard: [],
+      dataFilterName: {
+        dataName: '',
+      },
     };
   }
 
@@ -89,6 +92,15 @@ class App extends React.Component {
     }
   }
 
+  filterNameCard = ({ target }) => {
+    const { value } = target;
+    this.setState({
+      dataFilterName: {
+        dataName: value.toLowerCase(),
+      },
+    });
+  }
+
   render() {
     const {
       cardName,
@@ -101,7 +113,9 @@ class App extends React.Component {
       cardTrunfo,
       hasTrunfo,
       dataCard,
+      dataFilterName,
     } = this.state;
+    const { dataName } = dataFilterName;
     const { saveStateInput } = this;
     return (
       <>
@@ -131,29 +145,38 @@ class App extends React.Component {
         />
         <p>Coleção de Cartas</p>
 
+        <input
+          type="text"
+          data-testid="name-filter"
+          placeholder="Nome da Carta"
+          onChange={ this.filterNameCard }
+        />
+
         {
-          dataCard.map((element) => (
-            <div key={ element.cardName }>
-              <Card
-                cardName={ element.cardName }
-                cardDescription={ element.cardDescription }
-                cardAttr1={ element.cardAttr1 }
-                cardAttr2={ element.cardAttr2 }
-                cardAttr3={ element.cardAttr3 }
-                cardImage={ element.cardImage }
-                cardRare={ element.cardRare }
-                cardTrunfo={ element.cardTrunfo }
-              />
-              <button
-                type="button"
-                id={ element.cardName }
-                data-testid="delete-button"
-                onClick={ this.deleteCard }
-              >
-                Excluir
-              </button>
-            </div>
-          ))
+          dataCard
+            .filter((card) => card.cardName.toLowerCase().includes(dataName))
+            .map((element) => (
+              <div key={ element.cardName }>
+                <Card
+                  cardName={ element.cardName }
+                  cardDescription={ element.cardDescription }
+                  cardAttr1={ element.cardAttr1 }
+                  cardAttr2={ element.cardAttr2 }
+                  cardAttr3={ element.cardAttr3 }
+                  cardImage={ element.cardImage }
+                  cardRare={ element.cardRare }
+                  cardTrunfo={ element.cardTrunfo }
+                />
+                <button
+                  type="button"
+                  id={ element.cardName }
+                  data-testid="delete-button"
+                  onClick={ this.deleteCard }
+                >
+                  Excluir
+                </button>
+              </div>
+            ))
         }
       </>
 
