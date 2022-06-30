@@ -26,6 +26,7 @@ class App extends React.Component {
         dataTrunfo: false,
       },
       boolValue: false,
+      boolAux: true,
     };
   }
 
@@ -94,9 +95,7 @@ class App extends React.Component {
       dataCard: prevState.dataCard.filter(({ cardName }) => cardName !== target.id),
     }));
     const trunfoCard = dataCard.some(({ cardTrunfo }) => cardTrunfo);
-    if (trunfoCard) {
-      this.setState({ hasTrunfo: false });
-    }
+    if (trunfoCard) this.setState({ hasTrunfo: false });
   }
 
   filterNameCard = ({ target }) => {
@@ -133,14 +132,15 @@ class App extends React.Component {
           dataTrunfo: true,
         },
         boolValue: true,
+        boolAux: false,
       });
     } else {
       this.setState({
         dataFilterTrunfo: {
           dataTrunfo: false,
-
         },
         boolValue: false,
+        boolAux: true,
       });
     }
   }
@@ -149,7 +149,7 @@ class App extends React.Component {
     const {
       cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage,
       cardRare, cardTrunfo, hasTrunfo, dataCard, dataFilterName, dataFilterRare,
-      dataFilterTrunfo, boolValue } = this.state;
+      dataFilterTrunfo, boolValue, boolAux } = this.state;
     const { dataName } = dataFilterName;
     const { dataRare } = dataFilterRare;
     const { dataTrunfo } = dataFilterTrunfo;
@@ -217,7 +217,7 @@ class App extends React.Component {
           dataCard
             .filter((name) => name.cardName.toLowerCase().includes(dataName))
             .filter((rare) => rare.cardRare.startsWith(dataRare))
-            // .filter((trunfo) => trunfo.cardTrunfo === dataTrunfo)
+            .filter((trunfo) => trunfo.cardTrunfo === dataTrunfo || boolAux)
             .map((element) => (
               <div key={ element.cardName }>
                 <Card
