@@ -78,6 +78,17 @@ class App extends React.Component {
     }
   }
 
+  deleteCard = ({ target }) => {
+    const { dataCard } = this.state;
+    this.setState((prevState) => ({
+      dataCard: prevState.dataCard.filter(({ cardName }) => cardName !== target.id),
+    }));
+    const trunfoCard = dataCard.some(({ cardTrunfo }) => cardTrunfo);
+    if (trunfoCard) {
+      this.setState({ hasTrunfo: false });
+    }
+  }
+
   render() {
     const {
       cardName,
@@ -118,19 +129,31 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        <div>Coleção de Cartas</div>
+        <p>Coleção de Cartas</p>
+
         {
-          dataCard.map((element) => (<Card
-            key={ element.cardName }
-            cardName={ element.cardName }
-            cardDescription={ element.cardDescription }
-            cardAttr1={ element.cardAttr1 }
-            cardAttr2={ element.cardAttr2 }
-            cardAttr3={ element.cardAttr3 }
-            cardImage={ element.cardImage }
-            cardRare={ element.cardRare }
-            cardTrunfo={ element.cardTrunfo }
-          />))
+          dataCard.map((element) => (
+            <div key={ element.cardName }>
+              <Card
+                cardName={ element.cardName }
+                cardDescription={ element.cardDescription }
+                cardAttr1={ element.cardAttr1 }
+                cardAttr2={ element.cardAttr2 }
+                cardAttr3={ element.cardAttr3 }
+                cardImage={ element.cardImage }
+                cardRare={ element.cardRare }
+                cardTrunfo={ element.cardTrunfo }
+              />
+              <button
+                type="button"
+                id={ element.cardName }
+                data-testid="delete-button"
+                onClick={ this.deleteCard }
+              >
+                Excluir
+              </button>
+            </div>
+          ))
         }
       </>
 
