@@ -19,6 +19,9 @@ class App extends React.Component {
       dataFilterName: {
         dataName: '',
       },
+      dataFilterRare: {
+        dataRare: '',
+      },
     };
   }
 
@@ -101,6 +104,23 @@ class App extends React.Component {
     });
   }
 
+  filterRareCard = ({ target }) => {
+    const { value } = target;
+    if (value === 'todas') {
+      this.setState({
+        dataFilterRare: {
+          dataRare: '',
+        },
+      });
+    } else {
+      this.setState({
+        dataFilterRare: {
+          dataRare: value,
+        },
+      });
+    }
+  }
+
   render() {
     const {
       cardName,
@@ -114,8 +134,10 @@ class App extends React.Component {
       hasTrunfo,
       dataCard,
       dataFilterName,
+      dataFilterRare,
     } = this.state;
     const { dataName } = dataFilterName;
+    const { dataRare } = dataFilterRare;
     const { saveStateInput } = this;
     return (
       <>
@@ -152,9 +174,25 @@ class App extends React.Component {
           onChange={ this.filterNameCard }
         />
 
+        <label htmlFor="rare">
+          Raridade
+          <select
+            data-testid="rare-filter"
+            name="rare"
+            id="rare"
+            onChange={ this.filterRareCard }
+          >
+            <option>todas</option>
+            <option>normal</option>
+            <option>raro</option>
+            <option>muito raro</option>
+          </select>
+        </label>
+
         {
           dataCard
-            .filter((card) => card.cardName.toLowerCase().includes(dataName))
+            .filter((name) => name.cardName.toLowerCase().includes(dataName))
+            .filter((rare) => rare.cardRare.startsWith(dataRare))
             .map((element) => (
               <div key={ element.cardName }>
                 <Card
