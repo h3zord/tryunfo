@@ -1,5 +1,4 @@
 import React from 'react';
-import './form.css';
 import PropTypes from 'prop-types';
 
 class Form extends React.Component {
@@ -19,6 +18,9 @@ class Form extends React.Component {
       onSaveButtonClick,
     } = this.props;
 
+    const totalPoints = Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3);
+    const MAGIC_NUMBER = 210;
+
     const checkBoxInput = (
       <label htmlFor="superTrunfo">
         A carta é Super Trunfo?
@@ -35,6 +37,9 @@ class Form extends React.Component {
 
     return (
       <fieldset className="field">
+
+        <p className="title">ADICIONE NOVA CARTA</p>
+
         <label htmlFor="cardName">
           Nome da carta:
           <input
@@ -63,6 +68,7 @@ class Form extends React.Component {
           <input
             type="number"
             data-testid="attr1-input"
+            placeholder="Valor máximo: 90 pontos"
             name="cardAttr1"
             id="firstAttribute"
             value={ cardAttr1 }
@@ -75,6 +81,7 @@ class Form extends React.Component {
           <input
             type="number"
             data-testid="attr2-input"
+            placeholder="Valor máximo: 90 pontos"
             name="cardAttr2"
             id="secondAttribute"
             value={ cardAttr2 }
@@ -87,12 +94,15 @@ class Form extends React.Component {
           <input
             type="number"
             data-testid="attr3-input"
+            placeholder="Valor máximo: 90 pontos"
             name="cardAttr3"
             id="thirdAttribute"
             value={ cardAttr3 }
             onChange={ onInputChange }
           />
         </label>
+
+        <span>{`Pontos Restantes = ${MAGIC_NUMBER - totalPoints}`}</span>
 
         <label htmlFor="imgURL">
           insira a URL da imagem:
@@ -115,15 +125,16 @@ class Form extends React.Component {
             value={ cardRare }
             onChange={ onInputChange }
           >
-            <option>normal</option>
-            <option>raro</option>
-            <option>muito raro</option>
+            <option>Normal</option>
+            <option>Rara</option>
+            <option>Épica</option>
           </select>
         </label>
 
         {
           hasTrunfo
-            ? <p>Você já tem um Super Trunfo em seu baralho</p>
+            // eslint-disable-next-line max-len
+            ? <p className="already-trunfo">Você já tem um Super Trunfo em seu baralho!</p>
             : checkBoxInput
         }
 

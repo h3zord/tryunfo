@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-no-useless-fragment */
+/* eslint-disable react/jsx-max-depth */
 import React from 'react';
-import './form.css';
 import PropTypes from 'prop-types';
+import tryunfo from '../images/tryunfo.svg';
 
 class Card extends React.Component {
   render() {
@@ -14,41 +16,55 @@ class Card extends React.Component {
       cardRare,
       cardTrunfo,
     } = this.props;
+
     return (
       <>
-        <p data-testid="name-card">
-          { cardName }
-        </p>
+        <div className="first-border">
+          <div className="second-border">
+            <div className="third-border">
+              <div className="name-container">
+                <p data-testid="name-card" className="name">
+                  { cardName }
+                </p>
+              </div>
+              <div className="img-container" id={ cardRare }>
+                <img
+                  src={ cardImage }
+                  alt="card img"
+                  data-testid="image-card"
+                />
+              </div>
+              <div className="description-container">
+                <p data-testid="description-card">
+                  { cardDescription }
+                </p>
+              </div>
 
-        <img
-          src={ cardImage }
-          alt={ cardName }
-          data-testid="image-card"
-        />
+              <p data-testid="attr1-card" className="atributos">
+                { `Attr01................................................. ${cardAttr1}` }
+              </p>
 
-        <p data-testid="description-card">
-          { cardDescription }
-        </p>
+              <p data-testid="attr2-card" className="atributos">
+                { `Attr02................................................. ${cardAttr2}` }
+              </p>
 
-        <p data-testid="attr1-card">
-          { cardAttr1 }
-        </p>
+              <p data-testid="attr3-card" className="atributos">
+                { `Attr03................................................. ${cardAttr3}` }
+              </p>
 
-        <p data-testid="attr2-card">
-          { cardAttr2 }
-        </p>
+              <div className="test">
+                <span data-testid="rare-card" className="raridade">
+                  { cardRare }
+                </span>
 
-        <p data-testid="attr3-card">
-          { cardAttr3 }
-        </p>
+                {
+                  cardTrunfo ? <img src={ tryunfo } className="trunfo" alt="" /> : null
+                }
+              </div>
 
-        <p data-testid="rare-card">
-          { cardRare }
-        </p>
-
-        {
-          cardTrunfo ? <p data-testid="trunfo-card">Super Trunfo</p> : null
-        }
+            </div>
+          </div>
+        </div>
       </>
     );
   }
