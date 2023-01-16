@@ -1,6 +1,9 @@
+/* eslint-disable max-lines */
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import logo from './images/logo_tryunfo.svg';
+import './app.css';
 
 class App extends React.Component {
   constructor() {
@@ -12,7 +15,7 @@ class App extends React.Component {
       cardAttr2: '',
       cardAttr3: '',
       cardImage: '',
-      cardRare: '',
+      cardRare: 'Normal',
       cardTrunfo: false,
       hasTrunfo: false,
       dataCard: [],
@@ -71,10 +74,10 @@ class App extends React.Component {
       cardName: '',
       cardDescription: '',
       cardImage: '',
-      cardAttr1: '0',
-      cardAttr2: '0',
-      cardAttr3: '0',
-      cardRare: '',
+      cardAttr1: '',
+      cardAttr2: '',
+      cardAttr3: '',
+      cardRare: 'Normal',
     }));
     this.searchHasTrunfo();
   }
@@ -109,7 +112,7 @@ class App extends React.Component {
 
   filterRareCard = ({ target }) => {
     const { value } = target;
-    if (value === 'todas') {
+    if (value === 'Raridade') {
       this.setState({
         dataFilterRare: {
           dataRare: '',
@@ -154,42 +157,54 @@ class App extends React.Component {
     const { dataRare } = dataFilterRare;
     const { dataTrunfo } = dataFilterTrunfo;
     const { saveStateInput } = this;
+
     return (
-      <>
-        <Form
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          hasTrunfo={ hasTrunfo }
-          isSaveButtonDisabled={ this.buttonDisabled() }
-          onInputChange={ saveStateInput }
-          onSaveButtonClick={ this.saveButtonClick }
-        />
-        <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-        />
-        <p>Coleção de Cartas</p>
-        <input
-          type="text"
-          data-testid="name-filter"
-          placeholder="Nome da Carta"
-          onChange={ this.filterNameCard }
-          disabled={ boolValue }
-        />
-        <label htmlFor="rare">
-          Raridade
+      <div className="main">
+        <div className="header-logo">
+          <img src={ logo } alt="logo-img" />
+        </div>
+        <div className="main-container">
+          <div className="form-container">
+            <Form
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+              hasTrunfo={ hasTrunfo }
+              isSaveButtonDisabled={ this.buttonDisabled() }
+              onInputChange={ saveStateInput }
+              onSaveButtonClick={ this.saveButtonClick }
+            />
+          </div>
+          <div className="card-container">
+            <p className="title">PRÉ-VISUALIZAÇÃO</p>
+            <Card
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+            />
+          </div>
+        </div>
+        <p className="collection">Coleção de Cartas</p>
+        <div className="search-container">
+          <p>Filtros de busca</p>
+          <input
+            type="text"
+            data-testid="name-filter"
+            placeholder="Nome da Carta"
+            className="name-filter"
+            onChange={ this.filterNameCard }
+            disabled={ boolValue }
+          />
           <select
             data-testid="rare-filter"
             name="rare"
@@ -197,51 +212,54 @@ class App extends React.Component {
             onChange={ this.filterRareCard }
             disabled={ boolValue }
           >
-            <option>todas</option>
-            <option>normal</option>
-            <option>raro</option>
-            <option>muito raro</option>
+            <option>Raridade</option>
+            <option>Normal</option>
+            <option>Rara</option>
+            <option>Épica</option>
           </select>
-        </label>
-        <label htmlFor="trunfo">
-          Super Trunfo
-          <input
-            type="checkbox"
-            data-testid="trunfo-filter"
-            name="trunfo"
-            id="trunfo"
-            onChange={ this.filterTrunfoCard }
-          />
-        </label>
-        {
-          dataCard
-            .filter((name) => name.cardName.toLowerCase().includes(dataName))
-            .filter((rare) => rare.cardRare.startsWith(dataRare))
-            .filter((trunfo) => trunfo.cardTrunfo === dataTrunfo || boolAux)
-            .map((element) => (
-              <div key={ element.cardName }>
-                <Card
-                  cardName={ element.cardName }
-                  cardDescription={ element.cardDescription }
-                  cardAttr1={ element.cardAttr1 }
-                  cardAttr2={ element.cardAttr2 }
-                  cardAttr3={ element.cardAttr3 }
-                  cardImage={ element.cardImage }
-                  cardRare={ element.cardRare }
-                  cardTrunfo={ element.cardTrunfo }
-                />
-                <button
-                  type="button"
-                  id={ element.cardName }
-                  data-testid="delete-button"
-                  onClick={ this.deleteCard }
-                >
-                  Excluir
-                </button>
-              </div>
-            ))
-        }
-      </>
+          <label htmlFor="trunfo">
+            Super Trunfo
+            <input
+              type="checkbox"
+              data-testid="trunfo-filter"
+              name="trunfo"
+              id="trunfo"
+              onChange={ this.filterTrunfoCard }
+            />
+          </label>
+        </div>
+        <div className="all-cards">
+          {
+            dataCard
+              .filter((name) => name.cardName.toLowerCase().includes(dataName))
+              .filter((rare) => rare.cardRare.startsWith(dataRare))
+              .filter((trunfo) => trunfo.cardTrunfo === dataTrunfo || boolAux)
+              .map((element) => (
+                <div key={ element.cardName } className="card-container">
+                  <Card
+                    cardName={ element.cardName }
+                    cardDescription={ element.cardDescription }
+                    cardAttr1={ element.cardAttr1 }
+                    cardAttr2={ element.cardAttr2 }
+                    cardAttr3={ element.cardAttr3 }
+                    cardImage={ element.cardImage }
+                    cardRare={ element.cardRare }
+                    cardTrunfo={ element.cardTrunfo }
+                  />
+                  <button
+                    type="button"
+                    id={ element.cardName }
+                    data-testid="delete-button"
+                    onClick={ this.deleteCard }
+                    className="delete-button"
+                  >
+                    Excluir
+                  </button>
+                </div>
+              ))
+          }
+        </div>
+      </div>
     );
   }
 }
