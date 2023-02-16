@@ -41,15 +41,15 @@ class Card extends React.Component {
               </div>
 
               <p data-testid="attr1-card" className="atributos">
-                { `Attr01................................................. ${cardAttr1}` }
+                { `Ataque................................................. ${cardAttr1}` }
               </p>
 
               <p data-testid="attr2-card" className="atributos">
-                { `Attr02................................................. ${cardAttr2}` }
+                { `Defesa................................................. ${cardAttr2}` }
               </p>
 
               <p data-testid="attr3-card" className="atributos">
-                { `Attr03................................................. ${cardAttr3}` }
+                { `Magia.................................................. ${cardAttr3}` }
               </p>
 
               <div className="test">

@@ -3,6 +3,7 @@ import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
 import logo from './images/logo_tryunfo.svg';
+import interrogacao from './images/interrogacao.png';
 import './app.css';
 
 class App extends React.Component {
@@ -14,7 +15,7 @@ class App extends React.Component {
       cardAttr1: '',
       cardAttr2: '',
       cardAttr3: '',
-      cardImage: '',
+      cardImage: { interrogacao },
       cardRare: 'Normal',
       cardTrunfo: false,
       hasTrunfo: false,
@@ -73,7 +74,7 @@ class App extends React.Component {
       dataCard: [...prevState.dataCard, obj],
       cardName: '',
       cardDescription: '',
-      cardImage: '',
+      cardImage: { interrogacao },
       cardAttr1: '',
       cardAttr2: '',
       cardAttr3: '',
@@ -171,7 +172,7 @@ class App extends React.Component {
               cardAttr1={ cardAttr1 }
               cardAttr2={ cardAttr2 }
               cardAttr3={ cardAttr3 }
-              cardImage={ cardImage }
+              cardImage={ cardImage.interrogacao ? cardImage.interrogacao : cardImage }
               cardRare={ cardRare }
               cardTrunfo={ cardTrunfo }
               hasTrunfo={ hasTrunfo }
@@ -188,7 +189,7 @@ class App extends React.Component {
               cardAttr1={ cardAttr1 }
               cardAttr2={ cardAttr2 }
               cardAttr3={ cardAttr3 }
-              cardImage={ cardImage }
+              cardImage={ cardImage.interrogacao ? cardImage.interrogacao : cardImage }
               cardRare={ cardRare }
               cardTrunfo={ cardTrunfo }
             />
