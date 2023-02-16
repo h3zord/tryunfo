@@ -149,6 +149,7 @@ span {
   background-color: #2fc18c;
   border: none;
   color: white;
+  cursor: pointer;
   margin: auto;
   margin-top: 10px;
   padding: 10px;
@@ -257,7 +258,7 @@ span {
   width: 65px;
 }
 
-.test {
+.rarity-content {
   align-items: center;
   display: flex;
   height: 45px;
@@ -323,7 +324,7 @@ span {
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
   padding: 15px;
   width: 90%;
 }
@@ -332,6 +333,7 @@ span {
   background-color: #2fc18c;
   border: none;
   color: white;
+  cursor: pointer;
   margin: auto;
   margin-bottom: 20px;
   margin-top: 10px;

@@ -52,7 +52,7 @@ class Card extends React.Component {
                 { `Magia.................................................. ${cardAttr3}` }
               </p>
 
-              <div className="test">
+              <div className="rarity-content">
                 <span data-testid="rare-card" className="raridade">
                   { cardRare }
                 </span>
