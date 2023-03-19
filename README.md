@@ -67,3 +67,6 @@ Caso utilize o yarn
 ```
 yarn start
 ```
+<strong>O React irá executar a aplicação na porta padrão 3000.</strong>
+<br/>
+➜ http://localhost:3000/
