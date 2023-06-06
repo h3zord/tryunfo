@@ -25,12 +25,12 @@ https://user-images.githubusercontent.com/102384026/226148442-0125d701-0a2c-4928
 
 ## O que foi desenvolvido?
 
-<strong>Tryunfo</strong> é um projeto que permite criar baralhos de cartas personalizados. Foi desenvolvido usando React e CSS para estilização. O versionamento de código foi realizado com Git.
+<strong>Tryunfo</strong> é um projeto que permite criar baralhos de cartas personalizados. Foi desenvolvido usando react e CSS para estilização. O versionamento de código foi realizado com git.
 
 A tela principal da aplicação exige que o usuário preencha alguns campos, incluindo um nome e uma descrição para a carta, bem como valores para três atributos distintos. É importante notar que o valor total dos três atributos não pode exceder 210 pontos e nenhum atributo individual pode ultrapassar 90 pontos.
 O usuário também pode adicionar uma URL de uma imagem e escolher a raridade da carta, que pode ser normal, rara ou épica. O baralho só pode conter uma carta super trunfo. Depois de criar as cartas, é possível filtrá-las por nome, raridade ou se são super trunfos ou não.
 
-## Linguagens e ferramentas:
+## Linguagens e ferramentas
 - HTML
 - CSS
 - Javascript
@@ -67,6 +67,6 @@ Caso utilize o yarn
 ```
 yarn start
 ```
-<strong>O React irá executar a aplicação na porta padrão 3000.</strong>
+<strong>O react irá executar a aplicação na porta padrão 3000.</strong>
 <br/>
 ➜ http://localhost:3000/
